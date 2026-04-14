@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 정보</title>
+</head>
+<body>
+
+    <h3>회원 정보 조회</h3>
+
+    <p>아이디 : <span th:text="${member.id}"></span></p>
+
+    <p>비밀번호 : <span th:text="${member.passwd}"></span></p>
+
+    <p>거주지 : <span th:text="${member.city}"></span></p>
+
+    <p>성별 :
+        <span th:text="${member.gender == 'male' ? '남성' : (member.gender == 'female' ? '여성' : '')}"></span>
+    </p>
+
+    <p>취미 :
+        <span th:each="h : ${member.hobby}" th:text="${h} + ' '"></span>
+    </p>
+
+    <p>====== 가입 인사 ======</p>
+    <p th:text="${member.greetings}"></p>
+
+</body>
+</html>
