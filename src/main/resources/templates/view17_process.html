@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <title>Chap07</title>
+</head>
+<body>
+
+<h3 th:text="${title}"></h3>
+
+<p>실제 파일 이름 : <span th:utext="${originFileName}"/></p>
+<p>서버 파일 이름 : <span th:utext="${saveFileName}"/></p>
+
+<p>
+    <img th:src="@{'/images/' + ${saveFileName}}" style="width: 100%"/>
+</p>
+
+</body>
+</html>
