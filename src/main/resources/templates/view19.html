@@ -1,0 +1,20 @@
+<html>
+<head>
+    <title>Chap09</title>
+    <style>
+        span {
+            color: red;
+            border-color: red;
+        }
+    </style>
+</head>
+<body>
+<h3>Constraint Validator</h3>
+<form th:object="${student}" action="/exam19" method="post">
+    <p>ID : <input type="text" th:field="*{studentId}"/><span th:errors="*{studentId}"></span></p>
+    <p>PW : <input type="text" th:field="*{studentPw}"/><span th:errors="*{studentPw}"></span></p>
+    <p><input type="submit" value="확인"/></p>
+    <input type="reset" value="취소"/>
+</form>
+</body>
+</html>
