@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title>Chap09</title>
+    <style>
+        span {
+            color: red;
+            border-color: red;
+        }
+    </style>
+</head>
+<body>
+<h3>Validator 구현체 유형 유효성 검사</h3>
+<form th:object="${person}" action="/exam20" method="post">
+    <p>이름 : <input type="text" th:field="*{name}"/><span th:errors="*{name}"></span></p>
+    <p>나이 : <input type="number" th:field="*{age}"/><span th:errors="*{age}"></span></p>
+    <p>이메일 : <input type="text" th:field="*{email}"/><span th:errors="*{email}"></span></p>
+    <p><input type="submit" value="확인"/></p>
+    <input type="reset" value="취소"/>
+</form>
+</body>
+</html>
