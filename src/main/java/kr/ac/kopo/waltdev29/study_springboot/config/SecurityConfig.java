@@ -1,0 +1,64 @@
+package kr.ac.kopo.waltdev29.study_springboot.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+    // 특정 URI 접근 권한 설정
+    @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity http) {
+        http.authorizeHttpRequests(
+                authorize -> authorize
+                        .requestMatchers("/member/**").hasAnyRole("USER", "MANAGER", "ADMIN")
+                        .requestMatchers("/manager/**").hasRole("MANAGER")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .anyRequest().permitAll()
+        ).formLogin(Customizer.withDefaults());
+
+        return http.build();
+    }
+
+
+    // 암호화 설정
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+
+    // 사용자 정보 등록
+    @Bean
+    public UserDetailsService userDetailsService() {
+        UserDetails user = User.builder()
+                .username("guest")
+                .password(passwordEncoder().encode("guest@1234"))
+                .roles("USER")
+                .build();
+
+        UserDetails manager = User.builder()
+                .username("manager")
+                .password(passwordEncoder().encode("manager@1234"))
+                .roles("MANAGER")
+                .build();
+
+        UserDetails admin = User.builder()
+                .username("admin")
+                .password(passwordEncoder().encode("admin@1234"))
+                .roles("ADMIN")
+                .build();
+
+        return new InMemoryUserDetailsManager(user, manager, admin);
+    }
+}
