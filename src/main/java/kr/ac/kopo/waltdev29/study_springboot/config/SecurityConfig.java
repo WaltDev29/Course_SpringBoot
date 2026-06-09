@@ -21,9 +21,9 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) {
         http.authorizeHttpRequests(
                 authorize -> authorize
-                        .requestMatchers("/member/**").hasAnyRole("USER", "MANAGER", "ADMIN")
-                        .requestMatchers("/manager/**").hasRole("MANAGER")
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/exam21/member/**").hasAnyRole("USER", "MANAGER", "ADMIN")
+                        .requestMatchers("/exam21/manager/**").hasRole("MANAGER")
+                        .requestMatchers("/exam21/admin/**").hasRole("ADMIN")
                         .anyRequest().permitAll()
         ).formLogin(Customizer.withDefaults());
 
