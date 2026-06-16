@@ -2,9 +2,9 @@ package kr.ac.kopo.waltdev29.study_springboot.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,14 +19,27 @@ public class SecurityConfig {
     // 특정 URI 접근 권한 설정
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) {
-        http.authorizeHttpRequests(
+        http
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(
                 authorize -> authorize
                         .requestMatchers("/exam21/member/**").hasAnyRole("USER", "MANAGER", "ADMIN")
                         .requestMatchers("/exam21/manager/**").hasRole("MANAGER")
                         .requestMatchers("/exam21/admin/**").hasRole("ADMIN")
                         .anyRequest().permitAll()
-        ).formLogin(Customizer.withDefaults());
-
+                ).formLogin(
+                        formLogin -> formLogin
+                                .loginPage("/exam21/exam05")
+                                .loginProcessingUrl("/exam21/exam05")
+                                .defaultSuccessUrl("/exam21/admin")
+                                .usernameParameter("username")
+                                .passwordParameter("password")
+                                .failureUrl("/exam21/loginfailed")
+                ).logout(
+                    logout -> logout
+                            .logoutUrl("/exam21/logout")
+                            .logoutSuccessUrl("/exam21/exam05")
+                );
         return http.build();
     }
 

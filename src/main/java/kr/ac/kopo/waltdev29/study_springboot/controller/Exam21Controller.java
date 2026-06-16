@@ -84,4 +84,22 @@ public class Exam21Controller {
         return "view24";
     }
 
+    // 사용자 정의 로그인 관련 메소드
+    @GetMapping("/exam05")
+    public String requestMethod12() {
+        return "view25";
+    }
+
+    @GetMapping("/admin")
+    public String requestMethod13(Authentication user, Model model) {
+        model.addAttribute("username", user.getName());
+        return "view25_result";
+    }
+
+    // 사용자 정의 로그아웃 관련 메소드
+    @GetMapping("/logout")
+    public String requestMethod14() {
+        return "view25";
+    }
+
 }
