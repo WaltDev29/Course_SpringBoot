@@ -64,4 +64,14 @@ public class Exam21Controller {
         return "view22";
     }
 
+    @GetMapping("/exam03")
+    public String requestMethod8() {
+        return "view23";
+    }
+
+    @GetMapping("/manager/tag")
+    public String requestMethod9() {
+        return "view23";
+    }
+
 }

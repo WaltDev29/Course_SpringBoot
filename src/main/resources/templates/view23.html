@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ViewPage 사용자 정보 검색</title>
+</head>
+<body>
+    <h2>ViewPage 사용자 정보 검색</h2>
+    <div sec:authorize="hasRole('ROLE_MANAGER')">
+        <p><b>매니저 권한 화면입니다.</b></p>
+    </div>
+    <div sec:authorize="isAuthenticated()">
+        <p><b>역할 Manager가 로그인 중입니다.</b></p>
+        <p><a href="/exam21/exam02">[웹 요청 URI : /exam21/exam02]</a></p>
+    </div>
+    <div sec:authorize="isAnonymous()">
+        <p><b>로그인이 필요합니다.</b></p>
+        <p><a href="/exam21/manager/tag">[웹 요청 URI : /exam21/manager/tag]</a></p>
+    </div>
+</body>
+</html>
