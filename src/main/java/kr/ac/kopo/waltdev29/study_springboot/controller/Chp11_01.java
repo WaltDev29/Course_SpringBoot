@@ -17,7 +17,7 @@ public class Chp11_01 {
     }
 
     @GetMapping("/exam02")
-    public void method02() throws Exception {
-        throw new Exception(new UserException("User Exception 메시지입니다."));
+    public void method02() throws UserException {
+        throw new UserException("User Exception 메시지입니다.");
     }
 }
