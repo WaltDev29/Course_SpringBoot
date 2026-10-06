@@ -21,9 +21,19 @@
             <td th:text="${member.age}"></td>
             <td th:text="${member.email}"></td>
             <td><a th:href="@{'/exam14_01/edit/' + ${member.id}}">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                <a th:href="@{'/exam14_01/delete/' + ${member.id}}">Delete</a></td>
+                <a th:onclick="deleteMember([[${member.id}]]); return false">Delete</a>
+<!--                <a th:href="@{'/exam14_01/delete/' + ${member.id}}" >Delete</a>-->
+            </td>
         </tr>
     </table>
 </div>
+
+<script>
+    function deleteMember(id) {
+        if (confirm("해당 멤버를 삭제하시겠습니까?")) {
+            location.href = "/exam14_01/delete/" + id;
+        }
+    }
+</script>
 </body>
 </html>

@@ -50,4 +50,11 @@ public class Chp14_01 {
         repository.save(member3);
         return "redirect:/exam14_01";
     }
+
+    //Delete
+    @GetMapping("/delete/{id}")
+    public String deleteMember(@PathVariable Integer id) {
+        repository.deleteById(id);
+        return "redirect:/exam14_01";
+    }
 }
