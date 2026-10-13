@@ -20,7 +20,7 @@ public interface Member3Repository2 extends JpaRepository<Member3, Integer> {
     @Transactional
     @Query(value="select * from Member3 where id = ?", nativeQuery = true) // 표준 SQL
 //    @Query(value="select entity from Member3 entity where id = :e_id") // JPQL
-    public List<Member3> selectMemberById(@Param("e_id") int id);
+    public Member3 selectMemberById(@Param("e_id") int id);
 
 //    insert
     @Transactional
