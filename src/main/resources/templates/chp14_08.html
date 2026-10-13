@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chap14-JPA-First-Exam</title>
+</head>
+<body>
+<div align="center">
+    <h3>JPA 데이터베이스 실습4</h3>
+    <br>
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>아이디</th>
+            <th>이름</th>
+        </tr>
+        <tr th:each="team : ${teamList}">
+            <td th:text="${team.id}"></td>
+            <td th:text="${team.name}"></td>
+            <td><a th:href="@{'/exam14_03/edit/' + ${team.id}}">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a th:onclick="deleteProduct([[${team.id}]]); return false">Delete</a>
+            </td>
+        </tr>
+    </table>
+
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>아이디</th>
+            <th>이름</th>
+        </tr>
+        <tr th:each="player : ${playerList}">
+            <td th:text="${player.id}"></td>
+            <td th:text="${player.name}"></td>
+            <td><a th:href="@{'/exam14_03/edit/' + ${player.id}}">Edit</a></td>
+        </tr>
+    </table>
+</div>
+
+<script>
+    function deleteProduct(id) {
+        if (confirm("해당 플레이어를 삭제하시겠습니까?")) {
+            location.href = "/exam14_04/delete/" + id;
+        }
+    }
+</script>
+</body>
+</html>
